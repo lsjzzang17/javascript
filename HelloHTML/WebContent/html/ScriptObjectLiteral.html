@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+	<script>
+		var turnflag = false;
+		var computer = {
+			
+			manufacturer : "hp",
+			modelNm : "HP123123",
+			outPrice : 1000000,
+			isColor : true,
+			func : {
+					turnOn : function() {
+						if(turnflag==false){
+							console.log("turnOn 함수 호출");
+							turnflag=true;							
+							
+						}else{
+							console.log("이미 켜져있습니다.");
+						}
+					}
+					,turnOff : function() {
+						if(turnflag==true){
+							console.log("turnOff 함수 호출");
+							turnflag = false;
+						}
+						else{
+							console.log("이미 꺼져있습니다");
+						}
+					}
+					,volumeUp : function() {}
+					,volumeDown : function() {}
+			}	
+		};
+		console.log(computer["manufacturer"]);
+		console.log(computer["modelNm"]);
+		console.log(computer["isColor"]);
+		console.log(computer["outPrice"]);
+		
+		computer.func.turnOn();
+		computer["func"].turnOn();
+		computer.func.turnOff();
+		computer["func"]["turnOn"]();   //3가지 표현법이있음
+
+		
+		/* computer.isPentium = true;
+		console.log(computer.isPentium); */
+		
+				
+		
+		var myPerson = new Object();
+		myPerson.name = "홍길동";
+		myPerson.age = 500;
+		myPerson.showInfo = function(){
+			console.log(this.name);
+			console.log(this.age);
+		}
+		
+		//myPerson.showInfo();
+		
+	</script>
+</body>
+</html>

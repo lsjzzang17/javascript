@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+function operatorAdd(op1,op2){
+	return op1+op2;
+}
+
+function test(op1,op2,operator){
+	return operator(op1,op2);
+}
+
+
+window.onload = function(){  //무기명 함수 선언법
+	var obj = document.getElementById("contents");
+	obj.value = test(4,2,operatorAdd);
+	console.log(test(1,2,operatorAdd));
+}
+
+new Object(); 
+</script>
+</head>
+<body>
+
+	<input id = "contents" type = "text" value = "">
+	
+
+</body>
+</html>
