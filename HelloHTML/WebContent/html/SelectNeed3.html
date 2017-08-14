@@ -17,8 +17,8 @@ p{
 }
 </style>
 <script>
-
-var selectId = function (ids){
+    
+var SelectId = function (ids){
 		var id = null;
 		var currentSelect=null;		
 		var jSon = {
@@ -71,7 +71,7 @@ var selectId = function (ids){
 			 setFirstOption(document.getElementById(ids[i]));			 
 		}
 		
-		function setFirstOption(id){ //첫번째 option -선택으로- 배치
+		function setFirstOption(id){ //첫번째 option -선택- 으로 배치
 			var objOption = new Option();
 			objOption.value="";
 			objOption.text="-선택-";
@@ -82,9 +82,9 @@ var selectId = function (ids){
 		for(i=0; i<ids.length-1; i++){
 			id = document.getElementById(ids[i]);
 			if(i==0){
-				setFirstSelect(id);
+				setFirstSelect(id); //첫번째아이디일때
 			}else{				
-				eventHandler(id);				
+				eventHandler(id);  //나머지 아이디
 			}			
 		}
 		
@@ -100,10 +100,10 @@ var selectId = function (ids){
 			eventHandler(firstSelect);
 		}
 		
-		function setSamePid(selectObj,current){
+		function setSamePid(selectObj,current){ //Pid와 비교해서 같은것 옵션추가
 			for(var i=0; i<jSon.korea.length; i++){
 				if(current==jSon.korea[i].pid){
-					if(current!=""){							
+					if(current!=""){	//최근선택한값이 ""이 아닐때						
 						var objOption = new Option();			
 						objOption.value=jSon.korea[i].id;
 						objOption.text=jSon.korea[i].name;
@@ -119,23 +119,22 @@ var selectId = function (ids){
 				for(var i=0; i<ids.length-1; i++){					
 					if(id===document.getElementById(ids[i])){						
 						for(var j=i+1; j<ids.length; j++){
-							document.getElementById(ids[j]).length=1;
+							document.getElementById(ids[j]).length=1; //초기화
 						}
 						wantId = document.getElementById(ids[i+1]);
-					};
+					}
 				}						
 			
-				currentSelect = id.options[id.selectedIndex].value;	
+				currentSelect = id.options[id.selectedIndex].value;	 //최근선택값
 				setSamePid(wantId,currentSelect);
 			});
 				
 		}
 		
-	
-	
 	}
+	
 window.onload = function (){
-	var obj = new selectId(["first","second","third","four"]);
+	var obj = new SelectId(["first","second","third","four"]);
 }
 
 </script>
