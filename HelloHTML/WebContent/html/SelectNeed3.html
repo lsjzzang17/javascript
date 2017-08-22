@@ -18,8 +18,8 @@ p{
 </style>
 <script>
     
-var SelectId = function (ids){
-		var id = null;
+var SelectModule = function (ids){
+		var element = null;
 		var currentSelect=null;		
 		var jSon = {
 				korea : [
@@ -71,20 +71,20 @@ var SelectId = function (ids){
 			 setFirstOption(document.getElementById(ids[i]));			 
 		}
 		
-		function setFirstOption(id){ //첫번째 option -선택- 으로 배치
+		function setFirstOption(element){ //첫번째 option -선택- 으로 배치
 			var objOption = new Option();
 			objOption.value="";
 			objOption.text="-선택-";
-			id.add(objOption);
+			element.add(objOption);
 			
 		} 
 		
 		for(i=0; i<ids.length-1; i++){
-			id = document.getElementById(ids[i]);
+			element = document.getElementById(ids[i]);
 			if(i==0){
-				setFirstSelect(id); //첫번째아이디일때
+				setFirstSelect(element); //첫번째아이디일때
 			}else{				
-				eventHandler(id);  //나머지 아이디
+				eventHandler(element);  //나머지 아이디
 			}			
 		}
 		
@@ -100,7 +100,7 @@ var SelectId = function (ids){
 			eventHandler(firstSelect);
 		}
 		
-		function setSamePid(selectObj,current){ //Pid와 비교해서 같은것 옵션추가
+		function setOtherSelect(selectObj,current){ //Pid와 비교해서 같은것 옵션추가
 			for(var i=0; i<jSon.korea.length; i++){
 				if(current==jSon.korea[i].pid){
 					if(current!=""){	//최근선택한값이 ""이 아닐때						
@@ -113,20 +113,20 @@ var SelectId = function (ids){
 			}
 		}
 		
-		function eventHandler(id){
-			id.addEventListener("change",function(){
-				var wantId = null;				
+		function eventHandler(element){
+			element.addEventListener("change",function(){
+				var nextSelect = null;				
 				for(var i=0; i<ids.length-1; i++){					
-					if(id===document.getElementById(ids[i])){						
+					if(element===document.getElementById(ids[i])){						
 						for(var j=i+1; j<ids.length; j++){
 							document.getElementById(ids[j]).length=1; //초기화
 						}
-						wantId = document.getElementById(ids[i+1]);
+						nextSelect = document.getElementById(ids[i+1]);
 					}
 				}						
 			
-				currentSelect = id.options[id.selectedIndex].value;	 //최근선택값
-				setSamePid(wantId,currentSelect);
+				currentSelect = element.options[element.selectedIndex].value;	 //최근선택값
+				setOtherSelect(nextSelect,currentSelect);
 			});
 				
 		}
@@ -134,7 +134,7 @@ var SelectId = function (ids){
 	}
 	
 window.onload = function (){
-	var obj = new SelectId(["first","second","third","four"]);
+	var obj = SelectModule(["first","second","third","four","five"]);
 }
 
 </script>
@@ -143,11 +143,12 @@ window.onload = function (){
 	<div>
 		<p style="color:red;">수업예제(Select)</p>
 		<p>셀렉트 추가했을때 하위 데이터가 있으면 출력</p>
-		<p>(ex)칠성아파트</p>
+		<p>(ex)광양시*읍 칠성리 칠성아파트</p>
 		<select id="first"></select>
 		<select id="second"></select>
 		<select id="third"></select>
 		<select id="four"></select>
+		<select id="five"></select>
 	</div>
 </body>
 </html>
