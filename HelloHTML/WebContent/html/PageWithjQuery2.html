@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+	div.userToggleClass{
+		border:1px solid green;
+	}
+	
+	div.userToggleClass2{
+		background-Color:red;
+	}
+	
+</style>
+<script src="../js/jquery-3.2.1.js"></script>
+<script>
+$(document).ready(function(){
+	
+	/*  $("#toggleButton").click(function(){
+		$("#userToggle").userToggleClass("userToggleClass");
+		$("#userToggle2").userToggleClass("userToggleClass");
+		console.dir($("#userToggle"));
+		
+	});  */
+	
+	
+	$.fn.userToggleClass = function(className){	
+			return this.each(function(index,ele){
+				if($(this).hasClass(className)){
+					$(this).removeClass(className);
+				}else{
+					$(this).addClass(className);
+				}
+			});
+	};		
+	
+	
+	$("div").userToggleClass("userToggleClass");
+	
+	
+	
+});
+</script>
+</head>
+<body>
+	<input type="button" id="toggleButton" value="test"/>
+	<div id="userToggle" class="userToggleClass">userToggle</div>	
+	<div id="userToggle2">userToggle2</div>
+	
+</body>
+</html>
