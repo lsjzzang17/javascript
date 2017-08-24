@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function doSubmit(){
+
+	var name=document.getElementById("LastName");
+		
+	if(name.value != "michael"){
+		alert(1);
+		event.preventDefault();
+	}
+}
+
+function validateForm(){
+	var countryTp = document.getElementsByName("countryTp");
+	var favoriteColor = document.getElementById("color");
+	var isChecked = false;
+	
+		for(var i=0;i<countryTp.length;i++){
+			if(countryTp[i].checked){
+				isChecked=!isChecked
+				console.log(favoriteColor.value);
+			}				
+		}
+		if(!isChecked){
+			alert("내/외국인 구분을 선택하세요");
+			countryTp[0].focus();
+		}
+}
+
+
+
+function check(signIn){
+	
+	var radiocount=0;
+	var radiostart=0;
+	for(var i = 0; i<signIn.length;i++){
+	    if(signIn[i].dataset.validation == "Y"){
+	       if(signIn[i].type=="text"){
+	          if(signIn[i].value==""){
+	             alert(i+1+"번칸 빈칸");
+	             signIn[i].focus();
+	             return false;
+	          }
+	       }
+	       if(signIn[i].type=="radio"){
+	    	   if(radiostart==0){
+	    	   radiostart=i;
+	    	   }
+	          if(signIn[i].checked==true){
+	             radiocount++;
+	             
+	          }
+	       }
+	    }
+	 }
+	
+	if(radiocount<=0){		
+		alert("버튼을 체크해주세요");
+        signIn[radiostart].focus();
+	}
+
+}
+
+
+
+
+
+
+</script>
+
+</head>
+<body>
+	<form action="/action_page.php" id="signIn">
+		First name : <input type="text" name="firstName" id="firstName" placeholder="예)홍" data-validation="Y"><br>
+		Last name : <input type="text" name="LastName"  id="LastName" placeholder="예)길동" data-validation="Y"><br>
+		내국인 <input type="radio" name="countryTp" id="native" value="native" data-validation="Y">
+		외국인 <input type="radio" name="countryTp" id="foreigner" value="foreigner" data-validation="Y">
+		동물 <input type="radio" name="countryTp" id="animal" value="animal" data-validation="Y">
+		<br>
+		<input type="date" name="bday"><br>
+		<!-- 좋아하는 색:	<input type="color" id="color" value="#ffff"> -->
+		<input type="button" onclick="alert(document.getElementById('color').value);" value="색상값"><br><br>
+		<input type="submit" onclick="doSubmit();" value="전송"/>
+		<input type="button" onclick="check(document.getElementById('signIn'));" value="체크">
+		<input type="button" onclick="validateForm();" value="유효성체크수업예제">
+	</form>
+</body>
+</html>

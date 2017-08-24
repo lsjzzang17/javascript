@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src="../js/jquery-3.2.1.js"></script>
+<script>
+/* (function($){
+	
+})(jQuery); */
+//ready 함수를 이용
+$(document).ready(function(){
+	
+	 $.fn.greenify = function(){
+		return this.each(function(index,ele){
+			$(ele).css({backgroundColor:"green"});
+		});
+	}  //함수추가 첫번째 방법
+	
+	$.fn.extend({
+		changeCssColor: function(){
+			return this.each(function(index,ele){
+				$(ele).css({backgroundColor:"red"});
+			});		
+		}		
+	}); //함수추가 두번째 방법
+	
+	var $divFoo=$("div.foo").click(function(){   //selecter 이용형태
+		/* $("span",this).toggleClass("bar"); */		
+		$(this).css({border:"1px solid red"});		
+	}).greenify();
+	
+	//$divFoo.greenify();
+	 
+		$("#appendDiv").on("click",function(){    //Dom객체이용형태
+			$("<div/>",{
+				class:"default",
+				text:"Click me!",
+				click:function(){
+					$(this).toggleClass("test");
+				}
+			}).appendTo("body");
+		});
+	
+	jQuery.greenify2 = function(elements){				//jQuery함수객체에 추가하기
+		$(elements).css({backgroundColor:"yellow"});
+	}	
+	
+	/* $.extend({
+		greenify:function(elements){
+			$(elements).css({backgroundColor:"green"});
+		}
+	}); */
+	
+	
+	$.greenify2("div.yellow");
+	$("#header").greenify().changeCssColor(); //객체를 리턴해주기때문에 추가적으로 메소드호출가능
+	console.dir($("#header"));
+	$("#contents").changeCssColor();
+	
+		
+		
+});
+
+//function 포인터 			Dom이 완성이되면 함수호출
+$(function(){
+	
+});
+
+
+/* window.onload = function(){
+	var divFoo = $("div.foo");	
+ 	divFoo.click(function(){
+		console.dir(divFoo);
+		// var $this = $(this); jQuery 객체를 변수에 담주는것
+		$('span',this).addClass('bar');
+	}); 
+	
+	$.each([1,2,3,4],function(index,value){
+		console.log(index,value);
+	});
+	
+	divFoo.each(function(index,value){
+		console.log(index,value);
+	}).click(function(){
+		console.dir(divFoo);		
+		$('span',this).addClass('bar');
+	});
+	
+	$.each({name:"홍길동",age:"33",address:"전라남도"},function(index,value){
+		console.log(index,value);
+	});
+	
+} */
+</script>
+<style>
+div.foo > span.bar{
+	color:red;
+	background-color:blue;
+}
+
+div.default{
+	border:1px solid hotpink;
+	
+}
+
+div.test{
+	
+	background-color:red;
+}
+</style>
+</head>
+<body>
+	<div id="header">header</div><br/>
+	<div id="contents">contents</div><br/>	
+	<div class="yellow">classYellow</div><br/>
+	<input type="button" id="appendDiv" value="DIV추가"/>
+	<div class="foo">
+		<span>첫번째 div</span>
+	</div>
+	<div class="foo">
+		<span>두번째 div</span>
+	</div>
+</body>
+</html>

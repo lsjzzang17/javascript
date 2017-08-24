@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+
+//IIFE(Immediately Invoked Function Express)
+//즉시 실행 함수 표현법
+
+var test = 3;
+(function(param){
+	console.log(param);	
+	var primitiveVar1 = "john";
+	var primitiveVar2 = 3.14;
+	var obj={name:"홍길동"};
+	var refObj = obj;
+	refObj.age=15;
+	console.dir(obj);
+	console.dir(refObj);
+	console.log(new Date());
+	
+	console.log("Π");      //한자로 꼴아박기
+	console.log("\u03A0"); //유니코드사용
+	console.log("AbcDeF".toUpperCase().repeat(2)); //대문자로 2번반복
+	console.log("ABCD".concat("EFG")); //ABCD와 EFG를 이어주는것
+	console.log("abcd".charAt(0)); // 0번째 요소 추출
+	
+	var hostName;
+	console.log(hostName); //초기화하지 않아서 undefined
+	
+	if(new Date().getDay()==3)
+	{
+		console.log("수");
+	}
+	
+	/* console.log(typeof "John");
+	console.log(typeof 3.14);
+	console.log(typeof true);
+	console.log(typeof false);
+	console.log(typeof null);
+	console.log(typeof undefined); */
+	})(test);
+
+(function(param){  //선언과 동시에 실행
+	console.log(param);
+})("이거 들어오는구나");
+
+</script>
+
+</head>
+
+<body>
+	<ul>
+		<li>string</li>
+		<li>number</li>
+		<li>boolean</li>
+		<li>null</li>
+		<li>undefined</li>
+		
+	</ul>
+</body>
+</html>

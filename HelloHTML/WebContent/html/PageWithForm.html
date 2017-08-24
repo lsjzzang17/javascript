@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+legend{
+	border:2px solid green;
+}
+span{font-size:0.8em;}
+</style>
+
+<script>
+var regexp=/[a-z]/g;
+console.log(regexp.test("a"));
+console.log(regexp.test("A"));
+
+</script>
+
+</head>
+<body>
+
+<h1>회원가입</h1>
+<legend>
+	<form action="/singUp.do">
+		<div>
+			<span>이름 : </span>  <input type="text" value="" placeholder="이름"/>
+			<br>
+			<span>생년월일 : </span> 
+			<select>
+			<option value="년도">년도</option>
+			<option value="1997">1997</option>
+			<option value="1998">1998</option>
+			<option value="1999">"1999"</option>
+			</select>
+			<select>
+			<option value="월">월</option>
+			<option value="1">1월</option>
+			<option value="2">2월</option>
+			<option value="3">3월</option>
+			</select>
+			<br>
+			<span>성별 : </span>		
+			남<input type="radio" name="gender" value="male"/>
+			여<input type="radio" name="gender" value="female"/>
+			<br>
+			<textarea style="height:100px; width:400px; text-align:left;"></textarea>
+			<br>
+			<input type="submit" value="완료"/>
+			
+			
+		</div>
+	</form>
+</legend>
+</body>
+</html>

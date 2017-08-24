@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+var value = 100;
+(function(){	
+	var obj = {
+			value:1,
+			func1:function () {
+				this.value +=1;
+				console.log('func1() called. this.value : ' + this.value);
+				func2();
+				function func2(){
+					this.value+=1;
+					console.log('func2() called. this.value : ' + this.value);
+					func3();
+					function func3(){
+						this.value+=1;
+						console.log('func3() called. this.value : ' + this.value);
+					}
+					
+				}
+				
+			}
+	};
+	obj.func1();
+	
+	
+})();
+
+</script>
+</head>
+<body>
+
+</body>
+</html>

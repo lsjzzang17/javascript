@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTf-8">
+<title>Insert title here</title>
+<script>
+(function(){
+	var obj = {
+				data:[1,2,3],
+				validDate:"20170823"
+				};
+	
+	var property = getProperty();
+	//var data = eval("obj."+property);  //eval은 속도 저하가생김 
+	var data = obj[property];
+	console.log(data);	
+	function getProperty(){
+		return "data";
+	} 
+	
+})();
+
+(function(){
+	var obj={
+			data:{
+				innerData:{
+						realData:1234
+					}
+			}
+	};
+	inner();
+	function inner(){
+		console.log("1번(with시작전)=>"+obj.data.innerData.realData);
+		
+		with(obj.data.innerData){
+				realData="ddd";
+				console.log("2번(with안)=>"+realData);
+		}
+		console.log("3번(with후)=>"+obj.data.innerData.realData);
+	}
+})();
+</script>
+</head>
+<body>
+
+</body>
+</html>

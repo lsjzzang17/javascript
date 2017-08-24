@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+body{
+	font-family: Verdana,sans-serif;
+	font-size:0.9em;
+}
+header, footer{
+	padding:10px;
+	color:white;
+	background-color:black;
+}
+article{
+	border:3px dotted green;
+	margin:5px;
+	padding:10px;
+	background-color:white;
+	position:relative;
+	overflow:scroll;
+}
+
+section{
+	margin:5px;
+	padding:10px;
+	background-color:lightgrey;
+}
+
+section > article > div{
+	border:1px dotted green;
+	width:100px;
+	height:100px;
+	display:block;
+		
+}
+
+section > article > div.positionRelative {
+	border:1px dotted green;
+	width:100px;
+	height:100px;
+	display:block;
+	position:relative;
+	left:10px;
+	top:10px;
+		
+}
+
+section > article > div.positionAbsolute {
+	border:1px solid red;
+	width:100px;
+	height:100px;
+	display:block;
+	position:absolute;
+	left:10px;
+	top:10px;
+	
+}
+
+section > article > div.positionFixed{
+	border:1px solid black;
+	width:100px;
+	height:100px;
+	display:block;
+	position:fixed;
+	left:50%;
+	top:50%;
+	
+}
+
+
+
+
+section > article > div.myposition1{
+	background:red;
+	width:100px;
+	height:100px;
+	position:relative;
+	left:10px;
+	top:10px;
+	z-index:3;
+}
+section > article > div.myposition2{
+	background:green;
+	width:100px;
+	height:100px;
+	position:relative;
+	left:30px;
+	top:-70px;
+	z-index:2;
+}
+section > article > div.myposition3{
+	background:blue;
+	width:100px;
+	height:100px;
+	position:relative;
+	left:50px;
+	top:-150px;
+	z-index:1;
+}
+</style>
+</head>
+<body>
+	<header>
+		<h1>css position attribute</h1>
+	</header>
+	<section>
+		<article>
+			<div class="positionRelative">relative</div>
+			<div class="positionAbsolute">absolute</div>
+			<div>div3</div>
+		</article>
+	</section>
+	
+	<section>
+		<article>
+			<div class="myposition1"></div>
+			<div class="myposition2"></div>
+			<div class="myposition3"></div>
+			
+		</article>
+	</section>	
+	
+	<section>
+		<article>
+			<div></div>
+			<div class="positionAbsolute" style="z-index:3; background-color:red;"></div>
+			<div class="positionAbsolute" style="left:55px; top:55px; z-index:2; background-color:green;"></div>
+			<div class="positionAbsolute"style="left:105px; top:105px; z-index:1; background-color:blue;"></div>
+		</article>
+	</section>	
+</body>
+</html>

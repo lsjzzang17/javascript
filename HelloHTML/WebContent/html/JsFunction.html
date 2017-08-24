@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+(function(){
+	function add(x,y){
+		return x+y;		
+	}
+	
+	var plus = function(x,y){
+		return x+y;
+	}
+	
+	function Car(wheelCnt, manufacturer,speed){
+		var maxSpeed = 200;
+		var counter = 0;
+		this.wheelCnt = wheelCnt;
+		this.manufacturer = manufacturer;
+		this.speed = speed;		
+		this.speedUp = function(){
+			console.log(++counter);
+			if(this.speed>=maxSpeed){
+				throw "too fast";
+				return;
+			}
+			this.speed++;
+		}
+/* 		this.speedDown = function(){
+			this.speed--;
+		}	 */	
+	}
+	
+	Car.prototype.speedDown = function(){
+		this.speed--;
+	}
+	
+	var sm5 = new Car(4,"삼성",100);
+	console.dir(sm5.speedDown());
+	console.log(sm5.speed);
+	sm5.speedUp();
+	sm5.speedUp();
+	sm5.speedUp();
+	var k5 = new Car(4,"기아",80);
+	k5.speedDown();
+	console.log(k5.speed);
+	console.dir(sm5);
+	//console.dir(k5);
+	console.dir(Car);
+	
+	function person(pName,pAge){
+		var userName = pName;
+		var age = pAge;
+		function setUserName(name){
+			userName=name;
+		}
+		function getUserName(){
+			return userName;
+		}
+		return {setUserName:setUserName,getUserName:getUserName};				
+	}
+	
+	var person1 = person("홍길동",500);
+	var person2 = person("임꺽정",487);
+		
+	console.log(person1.getUserName());
+	console.log(person2.getUserName());
+	
+	
+})();
+</script>
+</head>
+<body>
+
+</body>
+</html>

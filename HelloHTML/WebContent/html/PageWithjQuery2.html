@@ -7,26 +7,25 @@
 	div.userToggleClass{
 		border:1px solid green;
 	}
-	
-	div.userToggleClass2{
-		background-Color:red;
-	}
-	
+
 </style>
 <script src="../js/jquery-3.2.1.js"></script>
 <script>
 $(document).ready(function(){
 	
-	/*  $("#toggleButton").click(function(){
-		$("#userToggle").userToggleClass("userToggleClass");
-		$("#userToggle2").userToggleClass("userToggleClass");
-		console.dir($("#userToggle"));
-		
-	});  */
+	  $("#toggleButton").click(function(){
+			$("div").userToggleClass("userToggleClass");		
+	});  
 	
+	/*
+	
+		toggleClass 를 add remove hasClass를 이용해서 
+		만들기
+	
+	*/
 	
 	$.fn.userToggleClass = function(className){	
-			return this.each(function(index,ele){
+			return this.each(function(){
 				if($(this).hasClass(className)){
 					$(this).removeClass(className);
 				}else{
@@ -34,11 +33,6 @@ $(document).ready(function(){
 				}
 			});
 	};		
-	
-	
-	$("div").userToggleClass("userToggleClass");
-	
-	
 	
 });
 </script>

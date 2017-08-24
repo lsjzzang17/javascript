@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+<script>
+var scope = "gloval";
+function f(){
+	console.log(scope);
+	var scope="local";
+	console.log(scope);
+}
+console.log(scope+"tt");
+console.log(f());
+
+
+</script>
+
+</head>
+<body>
+
+
+</body>
+</html>

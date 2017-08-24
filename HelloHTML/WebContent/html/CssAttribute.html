@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Css Attribute</title>
+<style>
+p{
+	font-size:1em;
+}
+
+p.small{
+	font-size:2em;
+}
+
+p.medium{
+	font-size:3em;
+}
+
+p.large{
+	font-size:4em;
+}
+div{
+	display:inline-block;
+	background-color:#ff0000;
+	width:10%;
+	height:100%;
+}
+
+div.hasBox{	
+	border:2px solid #000000;
+	padding: 10px;
+	margin: 10px;
+}
+
+
+section article{
+	border:	1px solid #0000ff;
+	margin:	2% 2%;
+}
+
+
+section#firstSection article{	
+	border-radius:25px;
+	background-color:gray;
+}
+
+section#secondSection article{
+	text-align:center;	
+	background-color:hotpink;
+	border-radius:25px;
+}
+
+section table.userTable{
+	width:100%;
+	
+}
+
+section table.userTable, section table.userTable th,section table.userTable td{
+	
+	border : 1px solid black;
+}
+
+section table.userTable > thead > tr > th{	
+	width:25%;
+}
+
+section table.userTable > tbody > tr > td.charType{
+	text-align:center;
+	color:rgba(0,0,0,0.5);
+}
+
+section table.userTable > tbody > tr > td.numberType{	
+	text-align:right;
+	color:hotpink;
+}
+
+
+</style>
+</head>
+<body>
+	<header><h1>css attribute</h1></header>
+	<section>
+		<div>div</div>
+		<div class="hasBox">div has box model</div>
+	</section>
+	<section id="firstSection">
+		<!-- <article>
+			<p>p tag css attribute1</p>
+			<p>p tag css attribute1</p>
+		</article> -->
+		<article>
+		<p class="small">p.small small</p>
+		<!-- <p class="medium">p.medium medium</p>
+		<p class="large">p.large large</p> -->
+		</article>
+	</section>
+	<section id="secondSection">		
+		<article>
+		<p class="small">p.small small</p>
+		<!-- <p class="medium">p.medium medium</p>
+		<p class="large">p.large large</p> -->
+		</article>
+	</section>
+	<section>
+		<h2>※급여테이블</h2>
+		<table class="userTable">
+			<thead>
+				<tr>
+					<th>사원명</th>
+					<th>사원No</th>
+					<th>직급</th>
+					<th>기본급</th>	
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td class="charType">홍길동</td>
+					<td class="charType">201509001</td>
+					<td class="charType">대리</td>
+					<td class="numberType">1,500,000</td>	
+				</tr>
+				<tr>
+					<td class="charType">임꺽정</td>
+					<td class="charType">201509002</td>
+					<td class="charType">대리</td>
+					<td class="numberType">1,300,000</td>	
+				</tr>
+				<tr>
+					<td class="charType">변사또</td>
+					<td class="charType">201509003</td>
+					<td class="charType">사원</td>
+					<td class="numberType">1,200,000</td>	
+				</tr>
+			</tbody>
+		</table>
+	</section>
+	
+</body>
+</html>

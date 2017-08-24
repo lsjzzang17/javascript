@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+	
+	function addRow(){
+		var fileTable = document.getElementById("fileTable");
+		var tBody = fileTable.tBodies[0];
+		var row = tBody.insertRow(tBody.rows.length);
+		//var cell = row.insertCell(0);
+		row.innerHTML='<td><input type="checkbox"></td>\
+			<td><input type ="text"></td>\
+			<td>&nbsp;</td>\
+			<td>&nbsp;</td>\
+			<td>&nbsp;</td>\
+			<td>&nbsp;</td>\
+			<td>&nbsp;</td>\
+			<td>&nbsp;</td>\
+			<td>&nbsp;</td>\
+			<td>&nbsp;</td>';
+		
+		/* cell.innerHTML='<input type="checkbox">';
+		row.insertCell(1).innerHTML = "dd;";
+		row.insertCell(2);
+		row.insertCell(3);
+		row.insertCell(4);
+		row.insertCell(5);
+		row.insertCell(6);
+		row.insertCell(7);
+		row.insertCell(8);
+		row.insertCell(9); */
+	}
+	
+	function delRow(){
+		var fileTable = document.getElementById("fileTable");
+		var tBody = fileTable.tBodies[0];
+		for(var i=tBody.rows.length-1; i>=0; i--){
+			var trObj = tBody.rows[i];
+			if(trObj.children[0].children[0].checked){
+				tBody.deleteRow(i);
+			}
+			
+		}
+		
+		
+	}
+</script>
+<body>
+	
+	<input type="color" id="color" value="#ffff">
+	<input type="button" onclick="alert(document.getElementById('color').value);" value="색상값">
+
+	
+	<h1 style="text-align:center">
+		<ins>자료보관문서색인표</ins>
+	</h1>
+	
+	<input type="button" onclick="addRow();" value="행추가">
+	<input type="button" onclick="delRow();" value="행삭제">
+		
+	<table id="fileTable" border="1" style="width:100%;">
+
+		<thead>
+			<tr>
+				<th rowspan="2" style="width:5%;">선택</th>				
+				<th rowspan="2" style="width:5%;" >NO</th>			
+				<th rowspan="2" style="width:5%;" >보 존<br>기 관</th>			
+				<th colspan="3" style="width:30%;">보 관 철</th>
+				<th rowspan="2" style="width:20%;">보관부서</th>
+				<th rowspan="2" style="width:5%;">승인<br>여부</th>
+				<th rowspan="2" style="width:5%;">승인</th>
+				<th rowspan="2" style="width:5%;">폐기일</th>						
+			</tr>
+			<tr>
+					<th style="width:4%;">분류기호</th>
+					<th>자료명</th>
+					<th style="width:4%;">전장수</th>
+			</tr>
+			
+		</thead>
+	
+		<tbody style="text-align:center">	
+			<tr>
+				<td><input type="checkbox"></td>
+				<td><input type="number" min="0" value="0"></td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+				<td>&nbsp;</td>
+			</tr>		
+						
+		</tbody>
+	
+	</table>
+	<table border="1" style="width:100%">
+		<tr><td> 블록레벨이라서 블록끼리는 안붙음</td></tr>
+	</table>
+	<h1>빼애액!</h1>
+	<img src= "../img/빼애액.jpg" alt="펭귄" width="500px" height="500px" ></a>
+
+</body>
+</html>

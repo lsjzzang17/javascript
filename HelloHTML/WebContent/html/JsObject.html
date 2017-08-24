@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script>
+function add(x,y){
+	return x+y;
+}
+
+var gVal=1;
+console.dir(outerFunc);
+console.log(outerFunc.version);
+function outerFunc(){
+	var oVar=2;
+	innerFunc();
+	function innerFunc(){
+		console.dir(innerFunc);
+		var iVar=3;
+	}
+	
+}
+outerFunc.version=1.5;
+outerFunc.sayHello=function(){	
+	console.log(outerFunc.version);
+	console.log(this.version);
+	console.log(outerFunc["version"]);
+}
+
+outerFunc.sayHello();
+/* console.dir(outerFunc);
+console.dir(outerFunc.version); */
+</script>
+</head>
+<body>
+
+</body>
+</html>

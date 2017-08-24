@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<script>
+
+
+
+window.onload = function(){
+	var btnIds = ["first","second","third"];
+	var names = ["hello","hi","good-bye"];
+	for(var i=0;btnIds.length;i++){
+		var ele = document.getElementById(btnIds[i]);
+		ele.addEventListener("click",(function(j){
+			return function(){
+				alert(names[j]);
+				};
+		})(i));
+		
+	}
+}
+
+</script>
+<body>
+<input id="first" type="button" value="first">
+<input id="second" type="button" value="second">
+<input id="third" type="button" value="third">
+</body>
+</html>
