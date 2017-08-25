@@ -3,23 +3,201 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script>
-
-	
-	var obj = document.getElementById("first");
-	var opt="";
-	
-	function myFunction(){
-		opt = document.createElement('option');
-		opt.text = 1;
-		
-		obj.add(opt);
-	}
-
-
-</script>
 </head>
-<body>
-<select id="first" onclick="myFunction()"></select>
+<style>
+.custom-menu {
+    display: none;
+    z-index: 1000;
+    position: absolute;    
+    border: 1px solid green;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+/* Each of the items in the list */
+.custom-menu li{
+    padding: 8px 12px;
+    cursor: pointer;
+    list-style-type: none;
+    transition: all .3s ease;
+    user-select: none;
+}
+
+.custom-menu li ul{
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid green;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+.custom-menu li ul ul{
+    display: none;
+    z-index: 1000;
+    position: absolute;
+    overflow: hidden;
+    border: 1px solid green;
+    white-space: nowrap;
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+}
+
+
+.custom-menu li:hover {
+    background-color: #DEF;
+}
+</style>
+<script src ="../js/jquery-3.2.1.js"></script>
+<script>
+$(document).ready(function(){
+	
+	function setFirstMenu(){
+		$(document).bind("contextmenu", function (event) {		    
+		    // Avoid the real one
+		    event.preventDefault();
+		       
+		    $(".custom-menu").finish().toggle(100).
+		    css({
+		        top: event.pageY + "px",
+		        left: event.pageX + "px"
+		    });
+		});
+	}
+	
+	setFirstMenu();
+	
+	function setChildMenu(ele){
+		
+		$(".custom-menu>li").children().css({display:"none"});
+	   ele.
+		    css({
+		    	display:"block",
+		        top: ele.pageY + "px",
+		        left: ele.pageX + "px"
+		    });
+		};
+	
+	
+
+
+// If the document is clicked somewhere
+$(document).bind("mousedown", function (e) {
+    
+    // If the clicked element is not the menu
+    if (!$(e.target).parents(".custom-menu").length > 0) {
+    	$(".custom-menu>li").children().css({display:"none"}); 
+    	
+        $(".custom-menu").hide(100);
+    }
+});
+
+
+// If the menu element is clicked
+ $(".custom-menu>li").click(function(){
+	var id = $(this).attr("data-action");
+	
+	switch(id){
+	
+	case "first" : {
+		setChildMenu($(this).children());		
+		break;
+	}
+	
+	case "second" : {
+		setChildMenu($(this).children());
+		break;
+	}
+	
+	case "third" : {
+		setChildMenu($(this).children());
+		break;
+	}
+	
+	}
+	
+	     
+  }); 
+  
+ $(".custom-menu>li>li").click(function(){
+		var id = $(this).attr("data-action");
+		
+		switch(id){
+		
+		case "first_UL1_LI1" : {
+			setChildMenu($(this).children());		
+			break;
+		}
+		
+		case "first_UL1_LI2" : {
+			setChildMenu($(this).children());
+			break;
+		}
+		
+		case "first_UL1_LI2" : {
+			setChildMenu($(this).children());
+			break;
+		}
+		
+		}
+		
+		     
+	  }); 
+  
+});
+</script>
+<body>	
+
+<ul class='custom-menu'>
+  <li data-action="first">첫번째 
+  	<ul class='.custom-menu'>
+  		<li data-action="first_UL1_LI1">firstLI-UL1 LI1</li>
+  		<li data-action="first_UL1_LI2">firstLI-UL1 LI2
+  			<ul class='.custom-menu'>
+  				<li>firstLI-UL2 LI1</li>
+  				<li>firstLI-UL2 LI2</li>
+  			</ul>
+  		</li>
+  		<li data-action="first_UL1_LI2">firstLI-UL1 LI3</li>
+  	</ul>
+  </li> 	
+  
+  <li data-action="second">두번째
+  	<ul class='.custom-menu'>
+  		<li>secondLI-UL1 LI1</li>
+  		<li>secondLI-UL1 LI2
+  			<ul class='.custom-menu'>
+  				<li>secondLI-UL2 LI1</li>
+  				<li>secondLI-UL2 LI2</li>
+  			</ul>
+  		</li>
+  		<li>secondLI-UL1 LI3</li>
+  	</ul>
+  </li>
+  <li data-action="third">세번째 
+  <ul class='.custom-menu'>
+  		<li>thirdLI-UL1 LI1</li>
+  		<li>thirdLI-UL1 LI2
+  			<ul class='.custom-menu'>
+  				<li>thirdLI-UL2 LI1</li>
+  				<li>thirdLI-UL2 LI2</li>
+  			</ul>
+  		</li>
+  		<li>thirdLI-UL1 LI3</li>
+  	</ul>
+  	</li> 
+</ul>
+Right click me
 </body>
 </html>
