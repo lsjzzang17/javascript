@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+
+<script src="../js/jquery-3.2.1.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+<script>
+(function($){
+	$.fn.createContextMenu = function(menuItems){
+		
+		this.on("contextmenu",function(event){
+			createContextMenuDiv(getChildNodesById(""));
+		});
+		
+		function createContextMenuDiv(nodes){
+			var id=genGuid();
+			addNewIdToMenuDivIdArr(id);
+			var $div = $("<div></div>").attr("id",id);
+			var $eachMenu = null;
+			for(var i=0;i<nodes.length;i++){
+				if(hasChild(nodes[i].id)){
+					$eachMenu = $("<div>"+nodes[i].name+"▶ </div>").attr("id",nodes[i].id);
+					$eachMenu.on("click",(function(pId){
+						return function(){
+							createContextMenuDiv(getChildNodesById(pId));
+						};
+					})(nodes[i].id));
+				}
+				else{
+					$eachMenu = $("<div>"+nodes[i].name+"</div>").attr("id",nodes[i].id);
+					$eachMenu.on("click",(function(node){
+						return function(){
+							removeDivs(node.id);
+							node.func();							
+						};
+					})(nodes[i]));
+				}
+				$div.append($eachMenu);
+				
+				
+			}
+			document.body.appendChild($div[0]);
+		};		
+		
+		var menuDivIdArr = [];// context menu를 구성하는 div의 id를 생성된 순서대로 저장
+		function addNewIdToMenuDivIdArr (id){
+			menuDivIdArr.push(id);
+		}
+		function removeIdsFromMenuDivIdArr(start,times){
+			menuDivIdArr.splice(start,times);
+		}
+		function removeDivs(baseDivId){
+			var foundIndex = originIndex = menuDivIdArr.indexOf(baseDivId);
+			if ( foundIndex != -1 ){
+				for(++foundIndex; foundIndex<menuDivIdArr.length; foundIndex++){
+					$("#"+menuDivIdArr[foundIndex]).remove();
+				}
+				removeIdsFromMenuDivIdArr(originIndex+1,menuDivIdArr.length-originIndex);
+			}
+		}
+		function hasChild(id){
+			for(var i=0; i<menuItems.length; i++){
+				if ( menuItems[i].pid === id ){
+					return true;
+				}
+			}
+			return false;
+		}
+		
+		function getChildNodesById(pId){
+			var nodes = [];
+			for(var i=0; i<menuItems.length; i++){
+				if ( menuItems[i].pid === pId ){
+					nodes.push(menuItems[i]);
+				}
+			}
+			return nodes;
+		}
+		function genGuid()
+		{
+		    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+		        return v.toString(16);
+		    });
+		}		
+	};
+})(jQuery);
+$(function(){
+	var pMenuObj = [
+	                	{id:"10000",pid:"",name:"그룹",func:function(){alert("그룹");}},
+	   	                 {id:"20000",pid:"",name:"북한",func:function(){alert("북한");}},
+	   	                 {id:"21001",pid:"20000",name:"평양",func:function(){alert("평양");}},	                 
+	   	                 {id:"11001",pid:"10000",name:"그룹설정",func:function(){alert("그룹설정");}},
+	   	                 {id:"11002",pid:"10000",name:"그룹해제1",func:function(){alert("그룹해제");}},
+	   	                 {id:"11101",pid:"11001",name:"그룹설정-1",func:function(){alert("그룹설정-1");}},
+	   	              ];
+	$(".custom-menu").createContextMenu(pMenuObj);
+});
+</script>
+</head>
+
+<body>
+
+	<div class="custom-menu">123412341234123412341234123423</div>
+
+</body>
+</html>
