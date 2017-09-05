@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+ .custom-menu {
+    display:block;
+    z-index: 1000;
+    position: absolute;    
+    border: 1px solid green;    
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+    width:100px;
+    height:100px;
+}
+ 
+body>div{
+	display:block;
+    z-index: 1000;
+    width:100px;
+    position: absolute; 
+    border: 1px solid green;    
+    font-family: sans-serif;
+    background: #FFF;
+    color: #333;
+    border-radius: 5px;
+    padding: 0;
+} 
+ 
+body> div:hover {
+    background-color: #DEF;
+
+} 
+</style>
+<script src="../js/jquery-3.2.1.js"></script>
+<script>
+(function($){
+	
+	$.fn.createContextMenu = function(menuItems,className){
+		
+		this.on("contextmenu",function(event){
+			
+			event.preventDefault();
+			createDivNodes(getChildNodesById(""),$(event.target).offset());
+				
+			
+			 $(this).css({
+					 top: event.target.pageY + "px",
+			        left: event.target.pageX + "px"
+			  });	
+		 
+			 
+		});
+		
+	 	this.bind("mousedown", function (event) {	    
+		    // If the clicked element is not the menu
+		    
+		    for(var i=1; i<document.body.children.length; i++){
+		    	
+		    	$(document.body.children[i]).remove();
+		    	$(document.body.children[i]).hide();
+		    }
+		    menuDivIdArr.length=0;
+		});
+		 
+		
+		function setDivPosition(divId,position){
+			
+			if(menuDivIdArr.length==1){
+				$("#"+divId).css({top:position.top+"px",left:position.left+104+"px"});
+			}
+			else{
+				$("#"+divId).css({top:position.top+"px",left:position.left+(menuDivIdArr.length*104)+"px"});
+			}
+			
+		}
+		
+		function createDivNodes(nodes,position){			
+			var id = genGuid();
+			addDivId(id);
+			var $div = $("<div></div>").attr("id",id);			
+			$eachMenu = null;
+			for(var i = 0; i<nodes.length; i++){
+				if(hasChild(nodes[i].id)){
+					$eachMenu = $("<div>"+nodes[i].name+"▶ </div>").attr("id",nodes[i].id);
+					$eachMenu.on("click",(function(pId){						
+						return function(){	
+							removeDiv($("#"+pId).parents()[0].id);
+							createDivNodes(getChildNodesById(pId),position);
+							
+						};
+					})(nodes[i].id));
+					
+				}else{
+					$eachMenu = $("<div>"+nodes[i].name+"</div>").attr("id",nodes[i].id);
+					$eachMenu.on("click",(function(node){											
+						return function(){							
+							removeDiv($("#"+node.id).parents()[0].id);							
+							node.func();
+							for(var i=1; i<document.body.children.length+1; i++){
+								$(document.body.children[i]).hide();
+							}
+						};
+					})(nodes[i]));
+				}
+				$div.append($eachMenu);				
+			}
+			
+			document.body.appendChild($div[0]);			
+		
+			setDivPosition(id,position);
+		
+			
+		}
+		
+		
+		
+		var menuDivIdArr=[];
+		function addDivId(id){
+			menuDivIdArr.push(id);
+		}
+		
+		function deleteDivId(start,howMuch){
+			menuDivIdArr.splice(start,howMuch);
+		}
+		
+		function removeDiv(baseDivId){			
+			var foundIndex=originIndex=menuDivIdArr.indexOf(baseDivId);
+			if ( foundIndex != -1 ){				
+				for(++foundIndex;foundIndex<menuDivIdArr.length;foundIndex++){
+					$("#"+menuDivIdArr[foundIndex]).remove();
+				}
+				deleteDivId(originIndex+1,menuDivIdArr.length-originIndex);
+			}
+			
+			
+		}
+		
+		function hasChild(id){
+			for(var i = 0; i<menuItems.length;i++){
+				if(menuItems[i].pid==id){
+					return true;	
+				}					
+			}
+			return false;
+			
+		}
+		
+		function getChildNodesById(pId){
+			var nodes=[];
+			for(var i = 0; i<menuItems.length;i++){
+				if(menuItems[i].pid==pId){
+					nodes.push(menuItems[i]);
+				}				
+			}
+			return nodes;
+		}
+		
+		function genGuid()
+		{
+		    return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+		        var r = Math.random()*16|0, v = c === 'x' ? r : (r&0x3|0x8);
+		        return v.toString(16);
+		    });
+		}
+		
+		
+	}
+	
+})(jQuery);
+
+$(function(){
+	var pMenuObj = [
+                	{id:"10000",pid:"",name:"그룹",func:function(){alert("그룹");}},
+   	                 {id:"20000",pid:"",name:"북한",func:function(){alert("북한");}},
+   	                 {id:"21001",pid:"20000",name:"평양",func:function(){alert("평양");}},	                 
+   	                 {id:"11001",pid:"10000",name:"그룹설정",func:function(){alert("그룹설정");}},
+   	                 {id:"11002",pid:"10000",name:"그룹해제1",func:function(){alert("그룹해제");}},
+   	                 {id:"11101",pid:"11001",name:"그룹설정-1",func:function(){alert("그룹설정-1");}},
+   	              ];
+	$(".custom-menu").createContextMenu(pMenuObj,".custom-menu");
+});
+</script>
+</head>
+<body>
+	<div class="custom-menu">RightClickMe</div>
+</body>
+</html>
