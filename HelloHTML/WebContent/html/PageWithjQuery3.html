@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script src = "../js/jquery-3.2.1.js"></script>
+<script>
+(function(){
+	
+})();
+
+$(document).ready(function(){
+	
+	$("div:nth-child(2)>div:nth-child(1)").css({backgroundColor:"pink"});
+	$("body>div").last().children().first().css({backgroundColor:"pink"});
+	
+});
+
+</script>
+</head>
+<body>
+	<div>red
+		<div>pink</div>
+	</div>
+	
+	<div>red
+		<div>pink</div>
+		<div>pink2</div>
+	</div>
+</body>
+</html>

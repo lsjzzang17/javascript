@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+input{
+	width:100px;
+	display:block;
+}
+
+
+</style>
+<script src="../js/jquery-3.2.1.js"></script>
+<script>
+
+
+function startBaseBallGame(TextId){
+	var userTextId = TextId;
+	var answerNumber = [
+						{"value":Math.floor((Math.random()*9)+1)},
+						{"value":Math.floor((Math.random()*9)+1)},
+						{"value":Math.floor((Math.random()*9)+1)}
+	];
+	
+	var overDeleteArr = deleteAnswerOverlapped(answerNumber);
+	console.log(overDeleteArr);
+	setButtonEvent(overDeleteArr,TextId);
+	
+	
+	function deleteAnswerOverlapped(overCheckAnswerNumber){  // 9/12 일 마지막 수정하던곳
+		
+		function OverlapCheck(){			
+			for(var i = 0; i<overCheckAnswerNumber.length-1; i++){				
+				for(var j = 1; j<overCheckAnswerNumber.length; j++){				  					  
+					if(overCheckAnswerNumber[i].value==overCheckAnswerNumber[j].value){						
+						overCheckAnswerNumber[j].value=Math.floor((Math.random()*9)+1);						
+					}				 
+				}
+			}			
+		}
+		return overCheckAnswerNumber;
+	}
+	
+	
+	function doMatchBaseBallNum(answer,userAnswerValue){		
+		var strikeCount = 0;
+		var ballCount = 0;	
+		console.log(answer);
+		var userAnswerArr = [
+		                     {"value":parseInt((String(userAnswerValue)).substring(0,1))},
+		                     {"value":parseInt((String(userAnswerValue)).substring(1,2))},
+		                     {"value":parseInt((String(userAnswerValue)).substring(2,3))}
+		                     ];
+		
+		for(var i = 0 ; i < answer.length; i++){
+			for(var j = 0; j < userAnswerArr.length; j++){
+				if(answer[i].value==userAnswerArr[j].value){
+					if(i==j){
+						strikeCount++;
+						
+					}else{
+						ballCount++;
+						
+					}
+				}
+			}
+		}
+		createPtagNodes(userAnswerValue,strikeCount,ballCount);		
+		
+	};
+	
+	function createPtagNodes(userAnswer,strikeCount,ballCount){
+		
+		if(strikeCount == 0 && ballCount == 0){
+			alert("아웃!");
+			$("body").append("<p> 아웃! 아무것도 맞지 않아요.</p>");		
+		}else if(strikeCount<3){
+			alert(strikeCount+"스트라이크"+ballCount+"볼");
+			$("body").append("<p>"+strikeCount+"스트라이크"+ballCount+"볼 : "+userAnswer+"&nbsp");
+		}else if(strikeCount == 3 && ballCount == 0){
+			alert("정답은 : "+userAnswer+"였네요!");						
+			for(var i = document.body.children.length-1; i>1; i--){			
+				document.body.children[i].remove();
+			}			
+				
+		}
+	}; 
+	
+	function setButtonEvent(answerNumber,userTextId){			
+		$("#btn_matchAnswer").click(function(event){
+			doMatchBaseBallNum(answerNumber,document.getElementById(userTextId).value);				
+		});
+	};
+	
+
+}
+
+window.onload = function(){
+	startBaseBallGame("answer");
+}
+</script>
+</head>
+<body>	
+	<input type = "text" id = "answer"/>
+	<input type = button value = "확인하기" id="btn_matchAnswer"/>	
+	
+</body>
+</html>
